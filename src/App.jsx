@@ -13,6 +13,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+  // const [loading, setLoading] = useState(true);
 
   const defaultAdmins = [
     { firstName: 'Admin1', lastName: 'User', email: 'admin1@example.com', password: 'password1', address: 'Address 1', mobile: '1234567890', profilePhoto: 'https://w0.peakpx.com/wallpaper/435/732/HD-wallpaper-laptop-numbers-dark.jpg' },
@@ -35,7 +36,8 @@ function App() {
     const loggedInAdmin = JSON.parse(localStorage.getItem('loggedInAdmin'));
     if (loggedInAdmin) {
       setProfilePhoto(loggedInAdmin.profilePhoto);
-    }
+    } 
+    // setLoading(false);
   }, []);
   
   
@@ -85,8 +87,18 @@ console.log('Stored admins:', storedAdmins);
     loggedInAdmin.profilePhoto = newPhoto; // Update the logged-in admin's profile photo
     localStorage.setItem('loggedInAdmin', JSON.stringify(loggedInAdmin)); // Save updated admin data
   };
+  // if (loading) {
+  //   return <div>Loading...</div>; // Or any placeholder
+  // }
+
   return (
-    <Router>
+    <Router basename='/admindashboard'>
+       {/* <div className="flex">
+    {isLoggedIn ? <Sidebar isSuperAdmin={isSuperAdmin} /> : null}
+    <div className="flex-1">
+      {isLoggedIn ? (
+        <Header profilePhoto={profilePhoto} onLogout={handleLogout} />
+      ) : null} */}
       <div className="flex">
         {isLoggedIn && <Sidebar isSuperAdmin={isSuperAdmin} />}
         <div className="flex-1">
